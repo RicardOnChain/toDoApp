@@ -1,19 +1,13 @@
 class Task {
-
-    static alltasks= []
-
-    static deleteTask(task){
-        Task.alltasks = Task.alltasks.filter(element =>element != task)        //method is static because it updates to allList araay is a class-level concern (not specific to an instance)
-    }
     
-    constructor (title, date,priority,listName,checklist) {
+    constructor (title, date,priority,listName="Personal") {
         this.title=title
         this.date=date
         this.priority=priority
-        this.checklist=checklist
+        this.checklist="off"
         this.listName=listName
+        this.type = "task"
         this.id=crypto.randomUUID()
-        Task.alltasks.push(this)
     }
 
 }
@@ -21,22 +15,11 @@ class Task {
 
 class TaskList {
 
-    static allLists= []      
-
-    static deleteList(listId){
-        TaskList.allLists = TaskList.allLists.filter(element => element != TaskList.getListObj(listId))                        //method is static because it updates to allList araay is a class-level concern (not specific to an instance)
-    }
-
-    static getListObj(listId){
-        const list = TaskList.allLists.find(object => object.id == listId)
-        return list
-    }
-
     constructor(name) {
         this.name = name
         this.tasks = []
+        this.type = "taskList"
         this.id=crypto.randomUUID()
-        TaskList.allLists.push(this)
     }
 
     removeTaskFromList(task){
@@ -53,13 +36,53 @@ class TaskList {
 
 
 
-const taskManager = () =>{
+const dataManager = () =>{
+
+    const saveToStorage = (data) => {
+    
+            localStorage.setItem(data.id,JSON.stringify(data))
+            
+        }
+   
+        
+    const getDataById = (id) => {
+        const data = localStorage.getItem(id) 
+        return (JSON.parse(data))
+    }
+    
+
+    const deleteDataById = (id) => {
+        localStorage.removeItem(id)
+
+    }
+
+    const getDataByListName = (taskListName) => {
+
+        for (let i=0; i< localStorage.length; i+=1){
+            const key = localStorage.key(i)
+            const value = JSON.parse(localStorage.getItem(key))
+
+            if (value.type != "task" && value.name==taskListName) 
+                return value.tasks
+            
+        }
+    }
+
+    const getAllTasks = () =>{
+        let array = [] 
+
+        for (let i=0; i< localStorage.length; i+=1){
+            const key = localStorage.key(i)
+            const value = JSON.parse(localStorage.getItem(key))
+            
+            if (value.type == "task") {array.push(value)}
+            }
+        return array
+    }       
 
 
-
-
-
+return {saveToStorage,getDataById, deleteDataById, getDataByListName, getAllTasks}
 
 }
 
-export {Task, TaskList} 
+export {Task, TaskList, dataManager} 

@@ -1,7 +1,8 @@
-*{
-    margin: 0;
+h1,h2,h3,h4,body{
+    margin:0;
     padding: 0;
 }
+
 body{
     height: 100vh;
     display: grid;
@@ -10,13 +11,14 @@ body{
     
 }
 
+/* Sidebar */
 
-.whiteText{
+.whiteText, .taskName{
     font-size: 1em;
     color:  rgb(218, 233, 233);
 }
     
-.greyText{
+.greyText, .taskPriority, .taskDate{
     font-size: 0.9em;
     color:  rgb(91, 91, 91);
     min-width: 100px;
@@ -27,9 +29,9 @@ body{
     padding: 20px 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
     grid-row: 1;
-    background-color: rgb(26, 4, 45);
+    background-color: rgba(0, 0, 0, 0.90);
 }
 
 #profileWidget{
@@ -45,21 +47,239 @@ body{
 
 #myListDiv {
     display: flex;
-    gap: 10px;
+    justify-content: space-between;
+    
 }
 
 .tab{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     
 }
-div>svg{
-    width: 25px;
+svg{
+    width: 15px;
     cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
 button{
     background-color: transparent;
     border: none;
+    cursor: pointer;
 }
+
+#addNewList{
+    display: flex;
+}
+
+/* New List Modal */
+
+dialog{
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 10px;
+}
+
+#listModal{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+input{
+    height: 40px;
+    grid-column: 1/3;
+    grid-row: 2/3;
+    background-color: transparent;
+    border: none;
+    font-size: 1.4em;
+    color: white;
+}
+
+input:focus{
+    border: none;
+    border-color: transparent;
+}
+
+#listModal>#createList{
+    color: white;
+    padding: 5px 15px;
+    background-color: rgb(36, 106, 211);
+    border-radius: 15px;
+    grid-column: 2/3;
+    grid-row:3/4
+
+}
+
+#listModal>#svg{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    width: 15px;
+    justify-self: end;
+}
+
+
+
+/* Content Div */
+
+#main{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+#header{
+    width: fit-content;
+    background-color: rgba(0, 0, 0, 0.90);
+    border-radius: 50px;
+    display: flex;
+    align-content: center;
+}
+
+.headerTitle{
+    color:  rgb(218, 233, 233);
+    padding: 10px 100px 10px 30px;
+    
+}
+
+#content{
+    flex: 1;
+    display: flex;
+}
+
+#taskBoard{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0.90);
+    border-radius: 15px;
+    gap:20px;
+    padding: 40px;
+}
+
+#addTaskButton{
+    display: flex;
+    align-content: center;
+    color: white;
+    background-color: rgb(36, 106, 211);
+    border-radius: 15px;
+    padding: 5px 20px;
+    width: fit-content;
+}
+
+
+
+/* Task card */
+
+.taskCard{
+    display: grid;
+    grid-template-columns: 50px 2fr 5fr;
+    grid-row: 1fr 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0.95);
+    flex: 1;
+    max-height: 50px ;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.toggleCheck{
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    width: 15px;
+    background-color: transparent;
+    border: 1px solid rgba(245, 245, 245, 0.546);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    grid-column: 1/2;
+    grid-row: 1/4;
+    align-self: center;
+
+}
+
+.toggleCheck:active{
+    background-color: green
+
+}
+
+.taskName{
+    grid-column: 2/4;
+    grid-row: 1/2;
+
+}
+
+.taskPriority{
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+
+.taskDate{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+.taskActionButtons{
+    grid-column: 3/4;
+    grid-row: 1/4;
+    align-self: center;
+    justify-self: end;
+    display: flex;
+    gap: 5px;
+}
+
+.taskActionLogo{
+    cursor: pointer;
+}
+
+/* New Task Modal */
+
+#newTaskModal>form{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 50px 3fr 1fr 1fr 1fr;
+    padding: 20px;
+}
+
+form>#svg{
+    grid-column: 2/3;
+    grid-row: 1/2;
+    justify-self: end;
+}
+
+#taskNameInput{
+    grid-column: 1/3;
+    grid-row: 2/3;
+}
+
+#taskDateInput{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
+
+#prioritySection{
+    grid-column: 1/2;
+    grid-row: 3/4;
+    display: flex;
+    justify-self: start;
+}
+
+#taskListInput{
+    grid-column: 1/2;
+    grid-row: 4/5;
+}
+
+#createTask{
+    grid-column: 2/3;
+    grid-row: 5/6;
+    color: white;
+    padding: 5px 15px;
+    background-color: rgb(36, 106, 211);
+    border-radius: 15px;
+}
+
+
 
