@@ -1,10 +1,12 @@
+import { format, add, isAfter} from "date-fns"
+
 class Task {
     
-    constructor (title, date,priority,listName="Personal") {
-        this.title=title
+    constructor (name, date,priority,listName="Personal") {
+        this.name=name
         this.date=date
         this.priority=priority
-        this.checklist="off"
+        this.check="off"
         this.listName=listName
         this.type = "task"
         this.id=crypto.randomUUID()
@@ -24,7 +26,7 @@ class TaskList {
 
     removeTaskFromList(task){
 
-        this.tasks = this.tasks.filter(element =>element != task)           //delete from List specific array
+        this.tasks = this.tasks.filter(element =>element.id != task.id)           //delete from List specific array
 
     }
 
@@ -56,17 +58,23 @@ const dataManager = () =>{
 
     }
 
+
     const getDataByListName = (taskListName) => {
+        
+        let haveFoundList = false
 
         for (let i=0; i< localStorage.length; i+=1){
             const key = localStorage.key(i)
             const value = JSON.parse(localStorage.getItem(key))
 
-            if (value.type != "task" && value.name==taskListName) 
-                return value.tasks
-            
+            if (value.type == "taskList" && value.name==taskListName) {
+                haveFoundList = true
+                return value
+                }
         }
+        if (haveFoundList == false) return null   
     }
+    
 
     const getAllTasks = () =>{
         let array = [] 
@@ -80,8 +88,36 @@ const dataManager = () =>{
         return array
     }       
 
+    const getWeekTasks = () =>{
+        let array = [] 
+        const todayDate = format (new Date(), 'yyyy-MM-dd')
+        const thresholdDate = add(todayDate,{days:7})
 
-return {saveToStorage,getDataById, deleteDataById, getDataByListName, getAllTasks}
+        for (let i=0; i< localStorage.length; i+=1){
+            const key = localStorage.key(i)
+            const value = JSON.parse(localStorage.getItem(key))
+            
+            if (!(isAfter(value.date, thresholdDate)) && value.type == "task") {array.push(value)}
+            }
+        return array
+                
+    }
+ 
+    const getAllLists = () =>{
+        let array = [] 
+
+        for (let i=0; i< localStorage.length; i+=1){
+            const key = localStorage.key(i)
+            const value = JSON.parse(localStorage.getItem(key))
+            
+            if (value.type == "taskList") {array.push(value)}
+            }
+        return array
+    }       
+
+
+
+return {saveToStorage,getDataById, deleteDataById, getDataByListName, getAllTasks, getAllLists, getWeekTasks}
 
 }
 

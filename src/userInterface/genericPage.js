@@ -1,3 +1,5 @@
+import { dataManager } from "../data"
+
 const mainDiv = document.querySelector("#content")
 const headerDiv = document.querySelector("#header")
 const taskBoard = document.createElement("div")
@@ -21,7 +23,7 @@ const addTaskBoard = () => {
     const buttonDiv = document.createElement("div")
     buttonDiv.setAttribute("id", "addTaskButton")
     buttonDiv.setAttribute("data-action", "openNewTaskPopUp")
-    
+
     const addTaskButton = document.createElement("button")
     addTaskButton.innerText = "Add Task"
     addTaskButton.classList.add("whiteText")
@@ -29,7 +31,7 @@ const addTaskBoard = () => {
     const addLogo = document.createElement("div")
     addLogo.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Edit / Add_Plus"> <path id="Vector" d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>`
     
-    buttonDiv.append(addLogo,addTaskButton)
+    buttonDiv.append(addTaskButton,addLogo)
     taskBoard.appendChild(buttonDiv)
     mainDiv.appendChild(taskBoard)
 
@@ -44,6 +46,12 @@ const loadTaskCard= (task) => {
 
     const toggleCheckDiv = document.createElement("div")
     toggleCheckDiv.classList.add("toggleCheck")
+    toggleCheckDiv.setAttribute("data-action","toggleCheckTask")
+
+    if (task.check == "on"){
+        toggleCheckDiv.classList.add("checked")
+        taskDiv.classList.add("completedTask")   
+    }
     
     const taskName = document.createElement("h3")
     taskName.innerText = task.name
@@ -75,8 +83,40 @@ const loadTaskCard= (task) => {
     taskDiv.append(toggleCheckDiv,taskName,taskPriority, taskDate, actionButtons)
     
     taskBoard.appendChild(taskDiv)
+}
+
+const loadDataToModal= (taskId) =>{
+
+    const task = dataManager().getDataById(taskId)
+
+    document.querySelector("#updateTaskForm>#taskNameInput").value = task.name
+    document.querySelector("#updateTaskForm>#taskDateInput").value = task.date
+    document.querySelector("#updateTaskForm>#taskListInput").value = task.listName
+    
+    switch (task.priority){
+
+        case "medium":
+            document.querySelector("priorityInputLMid").checked = true
+            break
+        
+        case "low":
+            document.querySelector("priorityInputLow").checked = true
+            break
+        
+        case "high":
+            document.querySelector("priorityInputLHigh").checked = true
+            break
+
+    }
+
+    document.querySelector("#updateTask").setAttribute("data-taskId", taskId)
 
 }
 
+const updateTaskUI= (e, taskId) =>{
 
-export {loadTaskCard, addTaskBoard, printHeader}
+    e.target.classList.toggle("checked")
+    document.querySelector(`[data-taskid="${taskId}"]`).classList.toggle("completedTask")
+}
+
+export {loadTaskCard, addTaskBoard, printHeader, loadDataToModal, updateTaskUI}

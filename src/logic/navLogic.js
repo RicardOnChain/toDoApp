@@ -3,6 +3,7 @@ import {TaskList, dataManager} from "../data"
 import { loadTaskCard, addTaskBoard, printHeader} from "../userInterface/genericPage"
 import { addListTab } from "../userInterface/navSection"    
 import { deleteListTab } from "../userInterface/navSection"
+import { deleteTask } from "./contentLogic"
 
 const modal = document.querySelector("dialog")
 
@@ -27,7 +28,7 @@ const wireEventListeners = (e)=>{
                     },                                        // compute what each button will do based on html data-action atribute
         createList: () => createNewList(inputField.value),
         closeModal: () => modal.close(),
-        renderWeekPage: () => renderAllTasks(),                                 // easier to mantain if new buttons with diferent behaviours are needed
+        renderWeekPage: () => renderWeekTasks(),                                 // easier to mantain if new buttons with diferent behaviours are needed
         renderAllTasksPage: () => renderAllTasks(),                             // respects the Open/Close principle
         renderListPage: () => renderTasksByList(listId),
         deleteListTab: () => deleteList(listId)
@@ -35,59 +36,71 @@ const wireEventListeners = (e)=>{
 
     if (action && typeof actions[action] === "function") {
         actions[action]()
+        inputField.value=""         //clear input value
 }
 
+    
 
 }
 
 const createNewList = (listName) => {
 
+    if (dataManager().getDataByListName(listName)!= null) {
+        return (alert("You already have a list with this name."))
+        }
     const list = new TaskList(listName)
     dataManager().saveToStorage(list)
     addListTab(list)
 
     modal.close()
 
+    return list
+
 
 }
 
+const renderAllListTabs = () => {
+
+    const listArray = dataManager().getAllLists()
+
+    for (const list of listArray){
+        addListTab(list)
+    }
+}
+
 const deleteList = (listId)=>{
-    dataManager().deleteDataById(listId)           //delete List from local storage
-    deleteListTab(listId)                       //delete from DOM
-    renderAllTasks()
+
+    const listContent = dataManager().getDataById(listId).tasks     
+    listContent.forEach(task => deleteTask(task.id))                //delete all tasks from the list
+
+    dataManager().deleteDataById(listId)                            //delete List from local storage
+    deleteListTab(listId)                                           //delete from DOM
+    renderWeekTasks()
 }
 
 const renderAllTasks = () =>{
     printHeader("All Tasks")
     addTaskBoard()
 
-    //const tasksArray = dataManager().getAllTasks()
-    const tasksArray = [
-        {
-            name: "Clean House",
-            data: 26121997,
-            priority: "high",
-            checklist:"off",
-            listName: "Personal",
-            type: "task",
-            id: 12345676
-        },
-        {
-            name: "Clean House",
-            data: 26121997,
-            priority: "high",
-            checklist:"off",
-            listName: "Personal",
-            type: "task",
-            id: 12345676
-        }
-    ]
+    const tasksArray = dataManager().getAllTasks()
+
+    tasksArray.forEach(task => loadTaskCard(task))
+
+}
+
+const renderWeekTasks = () =>{
+    printHeader("Next 7 days")
+    addTaskBoard()
+
+    const tasksArray = dataManager().getWeekTasks()
+
     tasksArray.forEach(task => loadTaskCard(task))
 
 }
 
 const renderTasksByList = (listId) =>{
     const listObj= dataManager().getDataById(listId)
+
     const tasksArray = listObj.tasks
 
     printHeader (listObj.name)
@@ -100,3 +113,7 @@ const renderTasksByList = (listId) =>{
     
 }
 
+renderAllListTabs()
+renderWeekTasks()
+
+export {createNewList, renderAllTasks}

@@ -1,4 +1,4 @@
-h1,h2,h3,h4,body{
+h1,h2,h3,h4,body, button{
     margin:0;
     padding: 0;
 }
@@ -22,22 +22,22 @@ body{
     font-size: 0.9em;
     color:  rgb(91, 91, 91);
     min-width: 100px;
-
 }
 
 #sidebar{
-    padding: 20px 20px;
+    padding: 20px 0px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     grid-row: 1;
-    background-color: rgba(0, 0, 0, 0.90);
+    background-color: #000;;
 }
 
 #profileWidget{
     display: grid;
     grid-template-columns: 1fr 3fr;
     column-gap: 25px;
+    margin-bottom: 30px;
+    padding: 0px 20px;
 }
 
 #profileImg{
@@ -48,14 +48,32 @@ body{
 #myListDiv {
     display: flex;
     justify-content: space-between;
+    margin: 20px 0px ;
+    padding: 0px 10px;
+    padding-right: 20px;
     
+}
+
+#mylists{
+    padding: 0px 10px;
+}
+
+div.tab{
+    padding: 5px 20px;
 }
 
 .tab{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+    transition: all 0.3s ease-in-out;
+    gap: 5px;
+    padding: 5px 0px;
+    padding-right: 20px;
+}
+
+.tab:hover{
+    background-color: #252525;
 }
 svg{
     width: 15px;
@@ -68,6 +86,7 @@ button{
     background-color: transparent;
     border: none;
     cursor: pointer;
+    flex: 1;
 }
 
 #addNewList{
@@ -99,7 +118,7 @@ input{
 }
 
 input:focus{
-    border: none;
+    outline: none;
     border-color: transparent;
 }
 
@@ -113,7 +132,7 @@ input:focus{
 
 }
 
-#listModal>#svg{
+#listModal>.svg{
     grid-column: 2/3;
     grid-row: 1/2;
     width: 15px;
@@ -131,6 +150,7 @@ input:focus{
     height: 100vh;
     padding: 40px;
     box-sizing: border-box;
+    background-color: #1c1c1c;;
 }
 
 #header{
@@ -143,33 +163,55 @@ input:focus{
 
 .headerTitle{
     color:  rgb(218, 233, 233);
-    padding: 10px 100px 10px 30px;
+    padding: 3px 100px 5px 15px;
     
 }
 
 #content{
     flex: 1;
     display: flex;
+    overflow-y: auto;
+    border-radius: 15px;
+    box-shadow: 4px 4px 5px rgb(0, 0, 0, 40%);
 }
+
 
 #taskBoard{
     display: flex;
     flex-direction: column;
     flex: 1;
     background-color: rgba(0, 0, 0, 0.90);
-    border-radius: 15px;
     gap:20px;
     padding: 40px;
+    overflow-y: auto; 
+          
 }
 
 #addTaskButton{
     display: flex;
     align-content: center;
     color: white;
-    background-color: rgb(36, 106, 211);
+    background-color: #0083ff;
     border-radius: 15px;
-    padding: 5px 20px;
+    padding: 7px 20px;
     width: fit-content;
+    gap: 10px;
+    transition: all 0.3s ease-in-out;
+
+}
+
+#addTaskButton:hover{
+    background-color: #006aff;
+
+}
+
+#addTaskButton>div{
+    height: 17px;
+    margin: auto;
+}
+
+#addTaskButton>div>svg{
+    width: 17px;
 }
 
 
@@ -180,7 +222,7 @@ input:focus{
     display: grid;
     grid-template-columns: 50px 2fr 5fr;
     grid-row: 1fr 1fr 1fr;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: #1c1c1c;
     flex: 1;
     max-height: 50px ;
     padding: 20px;
@@ -201,9 +243,16 @@ input:focus{
 
 }
 
-.toggleCheck:active{
-    background-color: green
+.checked{
+    background-color: #1c1c1c;
+    border-color: transparent;
+    content: "✔";
 
+}
+
+.completedTask{
+    background-color: transparent;
+    border: 1px solid rgba(245, 245, 245, 0.546) ;
 }
 
 .taskName{
@@ -237,14 +286,15 @@ input:focus{
 
 /* New Task Modal */
 
-#newTaskModal>form{
+#newTaskModal>form, #updateTaskModal>form{
     display: grid;
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 50px 3fr 1fr 1fr 1fr;
+    grid-template-rows: 25px 1fr 1fr 1fr 1fr;
     padding: 20px;
+    width: 400px
 }
 
-form>#svg{
+form>.svg{
     grid-column: 2/3;
     grid-row: 1/2;
     justify-self: end;
@@ -272,7 +322,7 @@ form>#svg{
     grid-row: 4/5;
 }
 
-#createTask{
+#createTask, #updateTask{
     grid-column: 2/3;
     grid-row: 5/6;
     color: white;
