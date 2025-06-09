@@ -33,13 +33,7 @@
         <dialog >
             <div id="listModal">
                     <button class="svg" data-action="closeModal">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                        <path d="M10.0303 8.96965C9.73741 8.67676 9.26253 8.67676 8.96964 8.96965C8.67675 9.26255 8.67675 9.73742 8.96964 10.0303L10.9393 12L8.96966 13.9697C8.67677 14.2625 8.67677 14.7374 8.96966 15.0303C9.26255 15.3232 9.73743 15.3232 10.0303 15.0303L12 13.0607L13.9696 15.0303C14.2625 15.3232 14.7374 15.3232 15.0303 15.0303C15.3232 14.7374 15.3232 14.2625 15.0303 13.9696L13.0606 12L15.0303 10.0303C15.3232 9.73744 15.3232 9.26257 15.0303 8.96968C14.7374 8.67678 14.2625 8.67678 13.9696 8.96968L12 10.9393L10.0303 8.96965Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="#ffffff"></path>
-                        </g>
-                        </svg>
+                        <svg viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
                     </button>
                     <input type="text" id="listNameInput" placeholder="Add a list title">
                     <button id="createList" data-action="createList"> Create list</button>
@@ -53,46 +47,56 @@
         <div id="content"></div>
         <dialog id="newTaskModal">
                     <form id="newTaskForm" action="">
-                        <button type="button" class=svg data-action="closeModal">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                            <path d="M10.0303 8.96965C9.73741 8.67676 9.26253 8.67676 8.96964 8.96965C8.67675 9.26255 8.67675 9.73742 8.96964 10.0303L10.9393 12L8.96966 13.9697C8.67677 14.2625 8.67677 14.7374 8.96966 15.0303C9.26255 15.3232 9.73743 15.3232 10.0303 15.0303L12 13.0607L13.9696 15.0303C14.2625 15.3232 14.7374 15.3232 15.0303 15.0303C15.3232 14.7374 15.3232 14.2625 15.0303 13.9696L13.0606 12L15.0303 10.0303C15.3232 9.73744 15.3232 9.26257 15.0303 8.96968C14.7374 8.67678 14.2625 8.67678 13.9696 8.96968L12 10.9393L10.0303 8.96965Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="#ffffff"></path>
-                            </g>
-                            </svg>
-                        </button>
-                        <input type="text" id="taskNameInput" name="taskName" placeholder="Add task" required>
-                        <input type="date" id="taskDateInput" name="taskDate" required>
+                        <input type="text" id="taskNameInput" name="taskName" placeholder="Add task title" required>
+                        <input type="text" name="taskList" id="taskListInput" placeholder="Add list" required>
                         <div id="prioritySection">
-                            <input type="radio" id="priorityInputLow" name="taskPriority" value="Low">
-                            <input type="radio" id="priorityInputMid" name="taskPriority" value="Medium" checked>
-                            <input type="radio" id="PriorityInputHigh" name="taskPriority" value="High">
+                            <label for="PriorityInputLow" class="radioButton">
+                                <input type="radio" id="PriorityInputLow" name="taskPriority" value="Low">
+                                <span> Low </span>
+                            </label>
+                            
+                            <label for="PriorityInputMid" class="radioButton">
+                                <input type="radio" id="PriorityInputMid" name="taskPriority" value="Medium" checked>
+                                <span>Medium</span>
+                            </label>
+                            
+                            <label for="PriorityInputHigh" class="radioButton">
+                                <input type="radio" id="PriorityInputHigh" name="taskPriority" value="High">
+                                <span>High</span>
+                            </label>
                         </div>
-                        <input type="text" name="taskList" id="taskListInput" placeholder="Add to list" required>
+                        <input type="date" id="taskDateInput" name="taskDate" required>
                         <button type="submit" id="createTask" data-action="addNewTask"> Add task</button>
+                        <button type="button" class=svg data-action="closeModal">
+                            <svg width=9px height=9px viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </button>
                     </form>
         </dialog>
         <dialog id="updateTaskModal">
                     <form  id="updateTaskForm" action="">
-                        <button type="button" class=svg data-action="closeModal">
-                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                            <path d="M10.0303 8.96965C9.73741 8.67676 9.26253 8.67676 8.96964 8.96965C8.67675 9.26255 8.67675 9.73742 8.96964 10.0303L10.9393 12L8.96966 13.9697C8.67677 14.2625 8.67677 14.7374 8.96966 15.0303C9.26255 15.3232 9.73743 15.3232 10.0303 15.0303L12 13.0607L13.9696 15.0303C14.2625 15.3232 14.7374 15.3232 15.0303 15.0303C15.3232 14.7374 15.3232 14.2625 15.0303 13.9696L13.0606 12L15.0303 10.0303C15.3232 9.73744 15.3232 9.26257 15.0303 8.96968C14.7374 8.67678 14.2625 8.67678 13.9696 8.96968L12 10.9393L10.0303 8.96965Z" fill="#ffffff"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="#ffffff"></path>
-                            </g>
-                            </svg>
-                        </button>
-                        <input type="text" id="taskNameInput" name="taskName" placeholder="Add task" required>
-                        <input type="date" id="taskDateInput" name="taskDate" required>
+                        <input type="text" id="taskNameInput" name="taskName" placeholder="Add task title" required>
+                        <input type="text" name="taskList" id="taskListInput" placeholder="Add list" required>
                         <div id="prioritySection">
-                            <input type="radio" id="PriorityInputLow" name="taskPriority" value="Low">
-                            <input type="radio" id="PriorityInputMid" name="taskPriority" value="Medium" checked>
-                            <input type="radio" id="PriorityInputHigh" name="taskPriority" value="High">
+                            <label for="PriorityInputLowUpdate" class="radioButton">
+                                <input type="radio" id="PriorityInputLowUpdate" name="taskPriority" value="Low">
+                                <span> Low </span>
+                            </label>
+                            
+                            <label for="PriorityInputMidUpdate" class="radioButton">
+                                <input type="radio" id="PriorityInputMidUpdate" name="taskPriority" value="Medium" checked>
+                                <span>Medium</span>
+                            </label>
+                            
+                            <label for="PriorityInputHighUpdate" class="radioButton">
+                                <input type="radio" id="PriorityInputHighUpdate" name="taskPriority" value="High">
+                                <span>High</span>
+                            </label>
                         </div>
-                        <input type="text" name="taskList" id="taskListInput" placeholder="Add to list" required>
+                        <input type="date" id="taskDateInput" name="taskDate" required>
                         <button type="submit" id="updateTask" data-action="updateTask"> Update Task</button>
+                        <button type="button" class=svg data-action="closeModal">
+                            <svg width=9px height=9px viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 21.32L21 3.32001" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M3 3.32001L21 21.32" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                        </button>
                     </form>
         </dialog>
     </div>

@@ -47,10 +47,12 @@ const loadTaskCard= (task) => {
     const toggleCheckDiv = document.createElement("div")
     toggleCheckDiv.classList.add("toggleCheck")
     toggleCheckDiv.setAttribute("data-action","toggleCheckTask")
+    toggleCheckDiv.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>`
 
     if (task.check == "on"){
         toggleCheckDiv.classList.add("checked")
-        taskDiv.classList.add("completedTask")   
+        taskDiv.classList.add("completedTask")
+
     }
     
     const taskName = document.createElement("h3")
@@ -115,8 +117,9 @@ const loadDataToModal= (taskId) =>{
 
 const updateTaskUI= (e, taskId) =>{
 
-    e.target.classList.toggle("checked")
+    e.target.closest(".toggleCheck")?.classList.toggle("checked")           //e.target can be the SVG sometimes, so we target the closest element with .toggleCheck
     document.querySelector(`[data-taskid="${taskId}"]`).classList.toggle("completedTask")
+
 }
 
 export {loadTaskCard, addTaskBoard, printHeader, loadDataToModal, updateTaskUI}
